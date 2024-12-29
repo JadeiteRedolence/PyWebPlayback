@@ -30,7 +30,7 @@ PyWebPlayback is a Flask web application that allows remote control of Windows s
 ### Quick Start
 ```bash
 # Clone repository
-git clone https://gitee.com/amazoncloud/DailyEfficent.git
+git clone https://gitee.com/amazoncloud/py-web-playback.git
 
 # Install dependencies
 pip install -r requirements.txt
