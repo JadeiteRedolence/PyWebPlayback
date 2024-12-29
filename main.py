@@ -1,6 +1,6 @@
 # Author: Gitee Volkath@amazoncloud
 # Program: PyWebPlayback ver 1.0.1 Build 2024.12.29
-# Repository: https://gitee.com/amazoncloud/DailyEfficent
+# Repository: https://gitee.com/amazoncloud/py-web-playback.git
 
 from flask import Flask, request, jsonify, render_template_string
 import ctypes
