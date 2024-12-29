@@ -89,7 +89,7 @@ PyWebPlayback
 ### 依赖安装
 ```bash
 # 克隆仓库
-git clone https://gitee.com/amazoncloud/DailyEfficent.git
+git clone https://gitee.com/amazoncloud/py-web-playback.git
 
 # 安装依赖
 pip install -r requirements.txt
