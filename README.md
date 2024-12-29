@@ -1,3 +1,4 @@
+![输入图片说明](WebUI-preview.pngimage.png)
 # PyWebPlayback - 网页版 Windows 媒体控制器
 
 ## 项目简介
