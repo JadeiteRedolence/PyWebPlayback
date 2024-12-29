@@ -74,7 +74,6 @@ baseport = config['baseport']
 version = 'PyWebPlayback ver 1.0.1 Build 2024.12.30'
 service_link = f"http://localhost:{baseport}/"
 
-# HTML template with a Genshin Impact style UI
 HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html lang="en">
