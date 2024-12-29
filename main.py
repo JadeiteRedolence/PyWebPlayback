@@ -10,6 +10,7 @@ import pythoncom
 import win32api
 import win32con
 import webbrowser
+from os import _exit as quit_completely
 
 
 app = Flask(__name__)
@@ -324,3 +325,4 @@ def control_playback():
 if __name__ == '__main__':
     webbrowser.open(service_link)
     app.run(host='0.0.0.0', port=baseport, debug=False)
+    quit_completely(0)
