@@ -254,7 +254,7 @@ baseport = 8080  # 或其他可用端口
 
 ## 作者
 
-[作者名称]
+Gitee Volkath@amazoncloud
 
 ## 致谢
 
