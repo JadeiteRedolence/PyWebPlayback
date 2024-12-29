@@ -98,14 +98,13 @@ HTML_TEMPLATE = '''
         body {
             font-family: 'Noto Sans', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(45deg, #ff0000, #00ff00);
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             color: white;
-            transition: background 2s ease;
-            animation: gradientAnimation 10s ease infinite;
+            animation: gradient 15s ease infinite;
         }
 
-        @keyframes gradientAnimation {
+        @keyframes gradient {
             0% {
                 background-position: 0% 50%;
             }
@@ -336,8 +335,10 @@ HTML_TEMPLATE = '''
             const color1 = getRandomColor();
             const color2 = getRandomColor();
             const color3 = getRandomColor();
-            const angle = Math.floor(Math.random() * 360);
-            document.body.style.background = `linear-gradient(${angle}deg, ${color1}, ${color2}, ${color3})`;
+            const color4 = getRandomColor();
+            document.body.style.background = `linear-gradient(-45deg, ${color1}, ${color2}, ${color3}, ${color4})`;
+            document.body.style.backgroundSize = '400% 400%';
+            document.body.style.animation = 'gradient 15s ease infinite';
         }
 
         // Initial background
