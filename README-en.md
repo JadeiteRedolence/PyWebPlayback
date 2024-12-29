@@ -1,275 +1,158 @@
 ![输入图片说明](WebUI-preview.pngimage.png)
 # PyWebPlayback - Web-based Windows Media Controller
 
-## Introduction
-
-PyWebPlayback is a Flask-based web application that enables users to remotely control Windows system volume and media playback through a web interface. The project features a modern Apple-style UI design, providing an intuitive and responsive user experience.
+## Overview
+PyWebPlayback is a Flask web application that allows remote control of Windows system volume and media playback through any web browser. Features a modern Apple-style interface with real-time controls and responsive design.
 
 ## Features
-
 - 🎵 Real-time volume control
-- ⏯️ Media playback control (play/pause, previous, next)
-- 🖥️ Cross-device control support
-- 🎨 Modern UI design
-- 📱 Mobile-friendly
-- 🔄 Real-time response
-- 🔒 Local secure operation
+- ⏯️ Media playback controls (play/pause, next, previous)
+- 🖥️ Cross-device control support 
+- 🎨 Modern UI with animations
+- 📱 Mobile-friendly design
+- 🔄 Real-time status updates
+- 📝 System logging
+- ⌨️ Custom shortcut support
 
 ## Tech Stack
-
-- **Backend**: Flask
+- **Backend**: Flask, Python 3.6+
+- **Audio Control**: pycaw, comtypes
+- **System Integration**: win32api
 - **Frontend**: HTML5, CSS3, JavaScript
-- **System Interface**: 
-  - pycaw (audio control)
-  - win32api (media key simulation)
-  - comtypes (COM component interaction)
-- **Design Philosophy**: Apple-style UI
 
-## Requirements
+## Installation
 
-### System Requirements
+### Requirements
+- Windows 10/11
+- Python 3.6 or higher
+- Modern web browser
 
-- Windows OS
-- Python 3.6+
-- Web browser (Chrome/Edge/Firefox latest versions recommended)
-
-### Dependencies
-
+### Quick Start
 ```bash
-pip install flask
-pip install pycaw
-pip install comtypes
-pip install pywin32
+# Clone repository
+git clone https://gitee.com/amazoncloud/DailyEfficent.git
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run application
+python PyWebPlayback.py
 ```
 
 ## Usage
 
-1. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Access Methods
+- Local: http://localhost:80/
+- Network: http://[your-ip]:80/
 
-2. **Run Program**
-   ```bash
-   python PyWebPlayback.py
-   ```
+### Controls
+1. **Volume Control**
+   - Slider for precise adjustment
+   - Mute toggle button
+   - Real-time feedback
 
-3. **Access Control Panel**
-   - Default browser opens automatically on startup
-   - Default address: http://localhost:80/
-   - Other devices on the same network can access via host IP
+2. **Media Controls**  
+   - Play/Pause toggle
+   - Next/Previous track
+   - Visual status indicators
 
-## Detailed Features
+3. **Shortcut Keys**
+   - Alt+1, Alt+2, Alt+3
+   - Ctrl+Alt+L
+   - Alt+Q (Quick exit)
 
-### 1. Volume Control
+## Development
 
-Volume control is implemented through pycaw library for precise Windows system volume control:
+### Project Structure
+```
+PyWebPlayback/
+├── PyWebPlayback.py      # Main application
+├── requirements.txt      # Dependencies
+└── README.md            # Documentation
+```
 
-- Slider range: 0-100%
-- Real-time response
-- Visual feedback
-- Precise adjustment
+### Core Components
 
-Core implementation:
+1. **Volume Control**
 ```python
 @app.route('/volume', methods=['POST'])
 def set_volume():
-    # Get volume value (0-100)
     volume = request.json.get('volume', 0)
-    
-    # Initialize COM library
-    pythoncom.CoInitialize()
-    try:
-        # Get default audio device
-        devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(
-            IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-        volume_interface = cast(interface, POINTER(IAudioEndpointVolume))
-        
-        # Set volume (value between 0.0 and 1.0)
-        volume_interface.SetMasterVolumeLevelScalar(volume/100, None)
-        
-        return jsonify({'status': 'success'})
-    finally:
-        # Release COM library
-        pythoncom.CoUninitialize()
+    # Set system volume using pycaw
 ```
 
-### 2. Media Control
-
-Media control features through media key simulation:
-
-- ⏯️ Play/Pause
-- ⏮️ Previous Track
-- ⏭️ Next Track
-
-Core implementation:
+2. **Media Control**
 ```python
 @app.route('/playback', methods=['POST'])
 def control_playback():
     action = request.json.get('action', '')
-    
-    # Media control key codes
-    VK_MEDIA_PLAY_PAUSE = 0xB3
-    VK_MEDIA_NEXT_TRACK = 0xB0
-    VK_MEDIA_PREV_TRACK = 0xB1
-    
-    try:
-        if action == 'playpause':
-            win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, 0, 0)
-            win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, win32con.KEYEVENTF_KEYUP, 0)
-        # ... other media control code
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)})
+    # Control media using win32api
 ```
 
-### 3. User Interface
-
-Design features:
-
-- Responsive layout
-- Dark theme
-- Glassmorphism effect
-- Smooth animations
-- Touch-optimized
-
-CSS core features:
-```css
-.container {
-    position: relative;
-    z-index: 1;
-    width: min(90%, 450px);
-    padding: clamp(1rem, 5vw, 3rem);
-    background: #161b22;
-    border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid #30363d;
+### Configuration
+```json
+{
+    "baseport": 80,
+    "listenaddress": "0.0.0.0",
+    "debug": false
 }
 ```
 
-## Development Guide
-
-### Project Structure
-
-```
-PyWebPlayback/
-│
-├── PyWebPlayback.py     # Main program
-├── requirements.txt     # Dependencies
-└── README.md           # Documentation
-```
-
-### Core Classes
-
-1. **Flask Application**
-   - Handle HTTP requests
-   - Serve web interface
-   - Manage routes
-
-2. **Audio Control**
-   - pycaw interface
-   - System volume management
-   - COM component interaction
-
-3. **Media Control**
-   - Key simulation
-   - Event handling
-   - Status feedback
-
-### Extension Development
-
-1. **Adding New Features**
-   ```python
-   @app.route('/new_feature', methods=['POST'])
-   def new_feature():
-       # Implement new feature
-       return jsonify({'status': 'success'})
-   ```
-
-2. **Customizing Interface**
-   - Modify HTML_TEMPLATE variable
-   - Add new styles
-   - Extend JavaScript functionality
-
 ## Troubleshooting
 
-### 1. Volume Control Issues
+### Common Issues
 
-Possible causes:
-- Not running as administrator
-- pycaw library installation error
-- System audio device issues
+1. **Service Won't Start**
+   - Check port availability
+   - Verify Python installation
+   - Run as administrator if needed
 
-Solution:
-```bash
-# Reinstall dependencies
-pip uninstall pycaw
-pip install pycaw
-```
+2. **Volume Control Issues**
+   - Reinstall pycaw
+   - Check audio device
+   - Verify COM components
 
-### 2. Media Control Not Responding
+3. **Media Keys Not Working**
+   - Check media player compatibility
+   - Verify win32api installation
+   - Check system shortcuts
 
-Possible causes:
-- win32api permission issues
-- Media player incompatibility
-- System hotkey conflicts
-
-Solutions:
-- Check pywin32 installation
-- Verify media player compatibility
-- Check system hotkey settings
-
-### 3. Web Page Inaccessible
-
-Possible causes:
-- Port in use
-- Firewall restrictions
-- Network configuration issues
-
-Solution:
-```python
-# Change port number
-baseport = 8080  # or other available port
-```
+## Security Notes
+- Local network only
+- No authentication required
+- Safe system API usage
 
 ## Contributing
-
-Contributions welcome:
-
-1. Fork project
+1. Fork repository
 2. Create feature branch
 3. Commit changes
 4. Push to branch
-5. Create Pull Request
-
-Code style requirements:
-- Follow PEP 8
-- Add comments
-- Write tests
-- Keep it simple
+5. Submit Pull Request
 
 ## License
-
-This project is licensed under the MIT License. See LICENSE file for details.
+MIT License
 
 ## Author
+Gitee: Volkath@amazoncloud
 
-Gitee Volkath@amazoncloud
+## Version History
+
+### v1.0.1 (2024.12.30)
+- Added logging system
+- UI improvements
+- Error handling
+- Configuration file support
+
+### v1.0.0 (2024.12.29)
+- Initial release
+- Basic functionality
+- Web interface
 
 ## Acknowledgments
-
-Thanks to these open source projects:
-- Flask
-- pycaw
-- pywin32
+- Flask framework
+- pycaw library
+- win32api
 - comtypes
 
-## Changelog
-
-### v1.0.0
-- Initial release
-- Basic volume control
-- Media playback control
-- Responsive interface
-
 ---
+**Note**: For personal use only. Not for commercial purposes.
