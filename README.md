@@ -1,4 +1,3 @@
-```markdown
 # PyWebPlayback - 网页版 Windows 媒体控制器
 
 ## 项目简介
@@ -275,6 +274,3 @@ Gitee Volkath@amazoncloud
 ---
 
 **注意**：本项目仅用于学习和个人使用，请勿用于商业用途。
-
-返回顶部
-```
