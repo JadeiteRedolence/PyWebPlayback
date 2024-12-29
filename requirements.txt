@@ -1,0 +1,4 @@
+Flask>=2.0.0
+pycaw>=20181226
+comtypes>=1.1.7
+pywin32>=300
