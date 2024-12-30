@@ -1,5 +1,3 @@
-![输入图片说明](WebUI-preview.pngimage.png)
-![输入图片说明](Mobile-preview.png499d18d4df1b094eb128612c5e0b0a00_720.jpg)
 # PyWebPlayback - 基于Web的Windows媒体控制器
 
 ## 目录
@@ -20,6 +18,9 @@ PyWebPlayback 是一个基于 Flask 的网页应用程序，允许用户通过�
 - 跨设备兼容性
 - 实时响应控制
 - 安全可靠的本地运行
+
+![输入图片说明](WebUI-preview.pngimage.png)
+![输入图片说明](Mobile-preview.png499d18d4df1b094eb128612c5e0b0a00_720.jpg)
 
 ## 主要功能
 
