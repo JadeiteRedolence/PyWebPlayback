@@ -1,9 +1,10 @@
-![输入图片说明](WebUI-preview.pngimage.png)
-![输入图片说明](Mobile-preview.png499d18d4df1b094eb128612c5e0b0a00_720.jpg)
 # PyWebPlayback - Web-based Windows Media Controller
 
 ## Overview
 PyWebPlayback is a Flask web application that allows remote control of Windows system volume and media playback through any web browser. Features a modern Apple-style interface with real-time controls and responsive design.
+
+![输入图片说明](WebUI-preview.pngimage.png)
+![输入图片说明](Mobile-preview.png499d18d4df1b094eb128612c5e0b0a00_720.jpg)
 
 ## Features
 - 🎵 Real-time volume control
